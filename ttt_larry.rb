@@ -104,23 +104,31 @@ game = Game.new
     puts "#{game.board.boardcase_7.boardcase_status} | #{game.board.boardcase_8.boardcase_status} | #{game.board.boardcase_9.boardcase_status}"
 
     if tour%2 != 0
-
-    puts "#{Player.get_list_of_players[0].player_name}, you play!"
-    puts "Please enter the number of the case you want to play."
-
-    boardcase_number_key = gets.chomp.to_i
-    boardcase_instance_chosen = game.board.hash_case[boardcase_number_key]
-    boardcase_instance_chosen.boardcase_status = game.player_1.token_type
-
+      ongoing_player = game.player_1
+      puts "#{Player.get_list_of_players[0].player_name}, you play!"
     else
-
-    puts "#{Player.get_list_of_players[1].player_name}, you play!"
-    puts "Please enter the number of the case you want to play."
-    boardcase_number_key = gets.chomp.to_i
-    boardcase_instance_chosen = game.board.hash_case[boardcase_number_key]
-    boardcase_instance_chosen.boardcase_status = game.player_2.token_type
-
+      ongoing_player = game.player_2
+      puts "#{Player.get_list_of_players[1].player_name}, you play!"
     end
 
+    puts "Please enter the number of the case you want to play."
+
+    boardcase_number_key = gets.chomp.to_i
+    boardcase_instance_chosen = game.board.hash_case[boardcase_number_key]
+
+      if boardcase_instance_chosen.boardcase_status == "X" || boardcase_instance_chosen.boardcase_status == "O"
+
+        while boardcase_instance_chosen.boardcase_status == "X" || boardcase_instance_chosen.boardcase_status == "O" do
+        puts "Please enter the number of a case that has not been played yet!"
+        boardcase_number_key = gets.chomp.to_i
+        boardcase_instance_chosen = game.board.hash_case[boardcase_number_key]
+        end
+
+        boardcase_instance_chosen.boardcase_status = ongoing_player.token_type
+
+      else
+        boardcase_instance_chosen.boardcase_status = ongoing_player.token_type
+
+      end
 
   end
