@@ -33,7 +33,7 @@ class Player
   def initialize(player_name, token_type)
     @player_name = player_name
     @token_type = token_type
-    @status = "ongoing"
+    @player_status = "ongoing"
     @@list_of_players.push(self)
   end
 
@@ -63,9 +63,122 @@ class Board
       @boardcase_9 = BoardCase.new(9)
       @hash_case = {1 => @boardcase_1, 2 => @boardcase_2, 3 => @boardcase_3, 4 => @boardcase_4, 5 => @boardcase_5, 6 => @boardcase_6, 7 => @boardcase_7, 8 => @boardcase_8, 9 => @boardcase_9}
 
-
   end
 
+
+  def who_wins
+
+      #If all cases are filled up with "X" or "O" tokens
+      @boardcases_list_of_statuses=[boardcase_1, boardcase_2, boardcase_3, boardcase_4, boardcase_5, boardcase_6, boardcase_7, boardcase_8, boardcase_9].map!{|element| element.boardcase_status}
+
+      @all_full = true
+
+      boardcases_list_of_statuses.each do |element|
+        if (element == "X") || (element == "O")
+          @boardcase_done = true
+
+        else
+          @boardcase_done = false
+
+        end
+
+        @all_full = @boardcase_done & @all_full
+
+      end
+
+      if @all_full == true
+        return "No one won"
+      end
+
+    ["X", "O"].each do |token|
+      #If tokens are aligned on column 1
+      if (boardcase_1.boardcase_status == token) && (boardcase_4.boardcase_status == token) && (boardcase_7.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      #If tokens are aligned on column 2
+      elsif (boardcase_2.boardcase_status == token) && (boardcase_5.boardcase_status == token) && (boardcase_8.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      #If tokens are aligned on column 3
+      elsif (boardcase_3.boardcase_status == token) && (boardcase_6.boardcase_status == token) && (boardcase_9.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      #If tokens are aligned on lign 1
+      elsif (boardcase_1.boardcase_status == token) && (boardcase_2.boardcase_status == token) && (boardcase_3.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      #If tokens are aligned on lign 2
+      elsif (boardcase_4.boardcase_status == token) && (boardcase_5.boardcase_status == token) && (boardcase_6.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      #If tokens are aligned on lign 3
+      elsif (boardcase_7.boardcase_status == token) && (boardcase_8.boardcase_status == token) && (boardcase_9.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      #If tokens are aligned on diagonal 1
+      elsif (boardcase_1.boardcase_status == token) && (boardcase_5.boardcase_status == token) && (boardcase_9.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      #If tokens are aligned on diagonal 2
+      elsif (boardcase_7.boardcase_status == token || boardcase_7.boardcase_status == "O") && (boardcase_5.boardcase_status == token) && (boardcase_3.boardcase_status == token)
+        if token == "X"
+          return "Player 1 WON!"
+
+        elsif token == "O"
+          return "Player 1 WON!"
+
+        end
+
+      else
+        return "The game goes on"
+
+      end
+
+
+
+  end
 
   def draw
 
@@ -93,6 +206,7 @@ game = Game.new
 ### MAIN GAME LOOP ###
 
   100.times do |tour|
+
     tour += 1
     puts "\n------------------ Round number #{tour} ------------------"
 
@@ -131,4 +245,11 @@ game = Game.new
 
       end
 
+    puts game.board.who_wins
+
+    if game.board.who_wins != "The game goes on"
+      break
+    end
+
   end
+end
