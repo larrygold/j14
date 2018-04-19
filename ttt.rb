@@ -100,12 +100,12 @@ player_2 = Player.new(input_2, "O")
     puts "----------"
     puts "#{boardcase_7.boardcase_name} | #{boardcase_8.boardcase_name} | #{boardcase_9.boardcase_name}"
 
-
     if tour%2 != 0
 
     puts "#{Player.get_list_of_players[0].player_name}, you play!"
 
     puts "Please enter the number of the case you want to play."
+
     boardcase_number_key = gets.chomp.to_i
     boardcase_instance_chosen = hash_case[boardcase_number_key]
 
