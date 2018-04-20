@@ -91,13 +91,14 @@ class Board
       end
 
     ["X", "O"].each do |token|
+
       #If tokens are aligned on column 1
       if (boardcase_1.boardcase_status == token) && (boardcase_4.boardcase_status == token) && (boardcase_7.boardcase_status == token)
         if token == "X"
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
@@ -107,7 +108,7 @@ class Board
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
@@ -117,7 +118,7 @@ class Board
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
@@ -127,7 +128,7 @@ class Board
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
@@ -137,7 +138,7 @@ class Board
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
@@ -147,7 +148,7 @@ class Board
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
@@ -157,7 +158,7 @@ class Board
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
@@ -167,16 +168,13 @@ class Board
           return "Player 1 WON!"
 
         elsif token == "O"
-          return "Player 1 WON!"
+          return "Player 2 WON!"
 
         end
 
-      else
-        return "The game goes on"
-
       end
 
-
+    end
 
   end
 
@@ -247,9 +245,8 @@ game = Game.new
 
     puts game.board.who_wins
 
-    if game.board.who_wins != "The game goes on"
+    if game.board.who_wins == "Player 1 WON!" || game.board.who_wins == "Player 2 WON!" 
       break
     end
 
   end
-end
